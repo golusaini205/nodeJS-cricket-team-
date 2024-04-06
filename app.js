@@ -36,7 +36,7 @@ const convertDbObjectToResponseObject = dbObject => {
     role: dbObject.role,
   }
 }
-
+//GET API
 app.get('/players/', async (request, response) => {
   const getPlayersQuery = `
     SELECT
@@ -62,6 +62,8 @@ app.get('/players/:playerId/', async (request, response) => {
   response.send(convertDbObjectToResponseObject(player))
 })
 
+
+//POST API
 app.post('/players/', async (request, response) => {
   const {playerName, jerseyNumber, role} = request.body
   const postPlayerQuery = `
@@ -72,6 +74,8 @@ app.post('/players/', async (request, response) => {
   const player = await database.run(postPlayerQuery)
   response.send('Player Added to Team')
 })
+
+//PUT API
 
 app.put('/players/:playerId/', async (request, response) => {
   const {playerName, jerseyNumber, role} = request.body
@@ -89,6 +93,8 @@ app.put('/players/:playerId/', async (request, response) => {
   await database.run(updatePlayerQuery)
   response.send('Player Details Updated')
 })
+
+//DELETE API
 
 app.delete('/players/:playerId/', async (request, response) => {
   const {playerId} = request.params
